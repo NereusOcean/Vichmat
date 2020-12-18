@@ -31,35 +31,35 @@ void drawTriangle() {
     double height = 1.5;
 
     glBegin(GL_TRIANGLES);
-    glColor3f(0.52, 0.44, 1.0);// Сделали боковую сторону фиолетовой
+    glColor3f(0.52, 0.44, 1.0);// фиолетовой
     glVertex3f((length / 2.0), (width / 2.0), -height/4.0);
     glVertex3f((length / 2.0), -(width / 2.0), -height/4.0);
     glVertex3f(0, 0, height*3.0/4.0);
     glEnd();
 
     glBegin(GL_TRIANGLES);
-    glColor3f(1.0, 0.84, 0.0);  // Сделали боковую сторону желтой
+    glColor3f(1.0, 0.84, 0.0);  // желтой
     glVertex3f((length / 2.0), -(width / 2.0), -height/4.0);
     glVertex3f(-(length / 2.0), -(width / 2.0), -height/4.0);
     glVertex3f(0, 0, height*3.0/4.0);
     glEnd();
 
     glBegin(GL_TRIANGLES);
-    glColor3f(0.94, 0.5, 0.5);// Сделали сторону  розовой
+    glColor3f(0.94, 0.5, 0.5);// розовой
     glVertex3f(-(length / 2.0), -(width / 2.0), -height/4.0);
     glVertex3f(-(length / 2.0), (width / 2.0), -height/4.0);
     glVertex3f(0.0, 0.0, height*3.0/4.0);
     glEnd();
 
     glBegin(GL_TRIANGLES);
-    glColor3f(0.0, 1.0, 0.0);  // Сделали сторону  светло зеленой
+    glColor3f(0.0, 1.0, 0.0);  // светло зеленой
     glVertex3f((length / 2.0), (width / 2.0), -height/4.0);
     glVertex3f(-(length / 2.0), (width / 2.0), -height/4.0);
     glVertex3f(0.0, 0.0, height*3.0/4.0);
     glEnd();
 
     glBegin(GL_QUADS);// основание пирамиды
-    glColor3f(1.0, 0.51, 0.28); // сделали основание рыжим
+    glColor3f(1.0, 0.51, 0.28); //  рыжим
     glVertex3f((length / 2.0), (width / 2.0), -height/4.0);
     glVertex3f((length / 2.0), -(width / 2.0), -height/4.0);
     glVertex3f(-(length / 2.0), -(width / 2.0), -height/4.0);
