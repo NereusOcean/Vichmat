@@ -31,13 +31,15 @@ RigidBody RigidBody::operator*(double h) const {
     result.L = L * h;
     return result;
 }
-
+/*INERTIA_TENSOR.values[0][0] = 3/(4*height/1.5);
+INERTIA_TENSOR.values[1][1] = 3/(4*(1.5*height*height*height)/12);
+INERTIA_TENSOR.values[2][2] = 3/(4*(1.5*height*height*height)/12);*/
 RigidBody::RigidBody() {
     INERTIA_TENSOR = {0, 0, 0, 0, 0, 0, 0, 0, 0};
-    INERTIA_TENSOR.values[0][0] = 20/((length * length + width * width) * mass);
-    INERTIA_TENSOR.values[1][1] = 20/(mass*((3 / 4) * height * height + width * width));
-    INERTIA_TENSOR.values[2][2] = 20/(mass*((3 / 4) * height * height + length * length));
-    q = {cos(45), 1, 0, 0};
+    INERTIA_TENSOR.values[0][0] = 2/(height/length);
+ INERTIA_TENSOR.values[1][1] = 2/((length*height*height*height)/12);
+ INERTIA_TENSOR.values[2][2] = 2/((length*height*height*height)/12);
+    q = {1, 1, 0, 0};
     R = q.toMatrix();
     L = Vector{2000, -1000, 1000};
 }
