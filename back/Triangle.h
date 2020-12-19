@@ -32,38 +32,30 @@ void drawTriangle() {
 
     glBegin(GL_TRIANGLES);
     glColor3f(0.52, 0.44, 1.0);// фиолетовой
-    glVertex3f((length / 2.0), (width / 2.0), -height/4.0);
-    glVertex3f((length / 2.0), -(width / 2.0), -height/4.0);
+    glVertex3f(0, (length / 2.0), -height/4.0);
+    glVertex3f(-(length / 2.0), -(width / 2.0), -height/4.0);
     glVertex3f(0, 0, height*3.0/4.0);
     glEnd();
 
     glBegin(GL_TRIANGLES);
     glColor3f(1.0, 0.84, 0.0);  // желтой
     glVertex3f((length / 2.0), -(width / 2.0), -height/4.0);
-    glVertex3f(-(length / 2.0), -(width / 2.0), -height/4.0);
+    glVertex3f(0, (length / 2.0), -height/4.0);
     glVertex3f(0, 0, height*3.0/4.0);
     glEnd();
 
     glBegin(GL_TRIANGLES);
     glColor3f(0.94, 0.5, 0.5);// розовой
     glVertex3f(-(length / 2.0), -(width / 2.0), -height/4.0);
-    glVertex3f(-(length / 2.0), (width / 2.0), -height/4.0);
-    glVertex3f(0.0, 0.0, height*3.0/4.0);
-    glEnd();
-
-    glBegin(GL_TRIANGLES);
-    glColor3f(0.0, 1.0, 0.0);  // светло зеленой
-    glVertex3f((length / 2.0), (width / 2.0), -height/4.0);
-    glVertex3f(-(length / 2.0), (width / 2.0), -height/4.0);
-    glVertex3f(0.0, 0.0, height*3.0/4.0);
-    glEnd();
-
-    glBegin(GL_QUADS);// основание пирамиды
-    glColor3f(1.0, 0.51, 0.28); //  рыжим
-    glVertex3f((length / 2.0), (width / 2.0), -height/4.0);
     glVertex3f((length / 2.0), -(width / 2.0), -height/4.0);
+    glVertex3f(0.0, 0.0, height*3.0/4.0);
+    glEnd();
+
+    glBegin(GL_TRIANGLES);// основание пирамиды
+    glColor3f(1.0, 0.51, 0.28); // рыжим
+    glVertex3f(0, (width / 2.0), -height/4.0);
     glVertex3f(-(length / 2.0), -(width / 2.0), -height/4.0);
-    glVertex3f(-(length / 2.0), (width / 2.0), -height/4.0);
+    glVertex3f((length / 2.0), -(width / 2.0), -height/4.0);
     glEnd();
 }
 
@@ -96,8 +88,8 @@ void Start(int argc, char * argv []) {
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
     glutInitWindowSize(600, 600);
     glutInitWindowPosition(0, 0);
-    glutCreateWindow("Kill me");
-    glutReshapeFunc(Reshape);
+    glutCreateWindow("Stop it");
+   glutReshapeFunc(Reshape);
     glutDisplayFunc(Display);
     glutIdleFunc(Idle);
     glClearColor(0, 0, 0, 0);
