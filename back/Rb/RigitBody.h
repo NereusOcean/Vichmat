@@ -9,7 +9,7 @@
 #include "../Quaternion.h"
 
 const double height = sqrt(1.5),length = 3;
-const double mass = 0.1;
+const double mass = 2;
 
 class RigidBody {
 public:
