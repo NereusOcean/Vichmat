@@ -8,15 +8,15 @@
 #include "../Vector.h"
 #include "../Quaternion.h"
 
-const double height = 1.5,length = 1.5,width = 1.5;
-const double mass = 2;
+const double height = sqrt(1.5),length = 3;
+const double mass = 0.1;
 
 class RigidBody {
 public:
-    Matrix R {};
-    Vector r {}, l {}, L {};
-    Quaternion q {};
-    Matrix INERTIA_TENSOR {};
+    Matrix R;
+    Vector r, l, L;
+    Quaternion q;
+    Matrix INERTIA_TENSOR;
 
     RigidBody();
     RigidBody f();
