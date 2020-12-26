@@ -26,36 +26,36 @@ void Idle() {
     glutPostRedisplay();
 }
 void drawTriangle() {
-    double length = 1.5;
-    double width = 1.5;
-    double height = 1.5;
+    double x = 3;
+    double y = 3;
+    double z = sqrt(1.5);
 
     glBegin(GL_TRIANGLES);
     glColor3f(0.52, 0.44, 1.0);// фиолетовой
-    glVertex3f(0, (width / 2.0), -height/2.0);
-    glVertex3f(-(length / 2.0), -(width / 2.0), -height/2.0);
-    glVertex3f(0, 0, height/2.0);
+    glVertex3f(0, y, -z);
+    glVertex3f(-x, -y, -z);
+    glVertex3f(0, 0, z);
     glEnd();
 
     glBegin(GL_TRIANGLES);
     glColor3f(1.0, 0.84, 0.0);  // желтой
-    glVertex3f((length / 2.0), -(width / 2.0), -height/2.0);
-    glVertex3f(0, (width / 2.0), -height/2.0);
-    glVertex3f(0, 0, height/2.0);
+    glVertex3f(x, -y, -z);
+    glVertex3f(0, y, -z);
+    glVertex3f(0, 0, z);
     glEnd();
 
     glBegin(GL_TRIANGLES);
     glColor3f(0.94, 0.5, 0.5);// розовой
-    glVertex3f(-(length / 2.0), -(width / 2.0), -height/2.0);
-    glVertex3f((length / 2.0), -(width / 2.0), -height/2.0);
-    glVertex3f(0.0, 0.0, height/2.0);
+    glVertex3f(-x , -y , -z);
+    glVertex3f(x, -y , -z);
+    glVertex3f(0.0, 0.0, z);
     glEnd();
 
     glBegin(GL_TRIANGLES);// основание пирамиды
     glColor3f(1.0, 0.51, 0.28); // рыжим
-    glVertex3f(0, (width / 2.0), -height/2.0);
-    glVertex3f(-(length / 2.0), -(width / 2.0), -height/2.0);
-    glVertex3f((length / 2.0), -(width / 2.0), -height/2.0);
+    glVertex3f(0, y, -z);
+    glVertex3f(-x, -y, -z);
+    glVertex3f(x, -y, -z);
     glEnd();
 }
 
