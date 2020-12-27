@@ -26,9 +26,9 @@ void Idle() {
     glutPostRedisplay();
 }
 void drawTriangle() {
-    double x = 3;
-    double y = 3;
-    double z = sqrt(1.5);
+    double x = 1.5;
+    double y = 1.5;
+    double z = 1.5;
 
     glBegin(GL_TRIANGLES);
     glColor3f(0.52, 0.44, 1.0);// фиолетовой
