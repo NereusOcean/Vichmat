@@ -5,28 +5,43 @@
 #ifndef VMTRIANGLE_TRIANGLE_H
 #define VMTRIANGLE_TRIANGLE_H
 #include "GL/glut.h"
-#include "Rb/RigitBody.h"
+#include "Rb/RigidBody.h"
+#include "ContextDynamic.h"
+#include "DynamicSystem.h"
+#include <iostream>
 
 RigidBody rigidBody = RigidBody();
 
-void solve(RigidBody &body, double h) {
-    RigidBody k1, k2, k3, k4;
-
-    k1 = body.f();
-    k2 = (body + k1 * (h / 3)).f();
-    k3 = (body + ((k1 * (-h / 3)) + (k2 * h))).f();
-    k4 = (body + ((k1 * h) + (k2 * (-h)) + (k3 * h))).f();
-    body = body + ((k1 * (1.0 / 8)) + (k2 * (3.0 / 8)) + (k3 * (3.0 / 8)) + (k4 * (1.0 / 8))) * h;
-
+void updateAfterSolve(RigidBody &body){
     body.q = body.q.normalize();
     body.R = body.q.toMatrix();
 }
+template < typename T, typename T2>
+void solve(T &body, T2 h) {
+    T k1, k2, k3, k4;
+    ContextDynamic system;
+
+    body = system.setTypeOfBody(&body);
+    k1 = body;
+    body =(body + k1 * (h / 3));
+    body = system.setTypeOfBody(&body);
+    k2 = body;
+    body = (body + ((k1 * (-h / 3)) + (k2 * h)));
+    body = system.setTypeOfBody(&body);
+    k3 = body;
+    body = (body + ((k1 * h) + (k2 * (-h)) + (k3 * h)));
+    body = system.setTypeOfBody(&body);
+    k4 = body;
+    body = body + ((k1 * (1.0 / 8)) + (k2 * (3.0 / 8)) + (k3 * (3.0 / 8)) + (k4 * (1.0 / 8))) * h;
+    std::cout<<"std\n";
+    updateAfterSolve(body);
+}
+
 
 void Idle() {
     glutPostRedisplay();
 }
-void drawTriangle() {
-    double x = 1.5;
+/*double x = 1.5;
     double y = 1.5;
     double z = 1.5;
 
@@ -56,13 +71,45 @@ void drawTriangle() {
     glVertex3f(0, y, -z);
     glVertex3f(-x, -y, -z);
     glVertex3f(x, -y, -z);
+    glEnd();*/
+void drawTriangle() {
+    double x = 1.5;
+    double y = 1.5;
+    double z = 1.5;
+
+    glBegin(GL_TRIANGLES);
+    glColor3f(0.52, 0.44, 1.0);// фиолетовой
+    glVertex3f(0, y, -z/4);
+    glVertex3f(-x, -y, -z/4);
+    glVertex3f(0, 0, z+z/4);
+    glEnd();
+
+    glBegin(GL_TRIANGLES);
+    glColor3f(1.0, 0.84, 0.0);  // желтой
+    glVertex3f(x, -y, -z/4);
+    glVertex3f(0, y, -z/4);
+    glVertex3f(0, 0, z+z/4);
+    glEnd();
+
+    glBegin(GL_TRIANGLES);
+    glColor3f(0.94, 0.5, 0.5);// розовой
+    glVertex3f(-x , -y , -z/4);
+    glVertex3f(x, -y , -z/4);
+    glVertex3f(0.0, 0.0, z+z/4);
+    glEnd();
+
+    glBegin(GL_TRIANGLES);// основание пирамиды
+    glColor3f(1.0, 0.51, 0.28); // рыжим
+    glVertex3f(0, y, -z/4);
+    glVertex3f(-x, -y, -z/4);
+    glVertex3f(x, -y, -z/4);
     glEnd();
 }
 
 void Display() {
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    solve(rigidBody, 0.000005);
+    solve<RigidBody,double>(rigidBody, 0.000005);
     glPushMatrix();
     glRotated(2*acos(rigidBody.q.r) * 180 / M_PI, rigidBody.q.i, rigidBody.q.j, rigidBody.q.k);
     glTranslated(0, 0, 0);

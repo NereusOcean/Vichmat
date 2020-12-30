@@ -11,6 +11,7 @@ class Matrix {
     
 public:
     double values[3][3];//3x3 наша матрица с типом double, int тут ни к черту
+
     Matrix operator=(Matrix A) {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
