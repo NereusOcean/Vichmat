@@ -14,7 +14,6 @@ public:
     Vector r, l, L;
     Quaternion q;
     Matrix INERTIA_TENSOR;
-    virtual void DynamicSyste();
 
    // virtual void Construct(DynamicSystem res,double mass,double length,double height) ;
     virtual DynamicSystem* f() = 0;

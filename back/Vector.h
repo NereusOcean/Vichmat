@@ -27,6 +27,13 @@ public:
         result.z = z + other.z;
         return result;
     }
+ /*   Vector operator=(Vector other) const{
+        Vector result;
+        result.x = other.x;
+        result.y = other.y;
+        result.z = other.z;
+        return result;
+    }*/
 
 };
 

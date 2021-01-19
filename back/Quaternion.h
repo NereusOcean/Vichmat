@@ -63,6 +63,14 @@ public:
         result.k = k + other.k;
         return result;
     }
+   /* Quaternion operator=(Quaternion other) const {
+        Quaternion result;
+        result.r = other.r;
+        result.i = other.i;
+        result.j = other.j;
+        result.k = other.k;
+        return result;
+    }*/
 };
 
 #endif //VMTRIANGLE_QUATERNION_H

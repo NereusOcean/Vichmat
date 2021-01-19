@@ -6,7 +6,7 @@
 #include <iostream>
 
 DynamicSystem* RigidBody::f() {
-    DynamicSystem* result;
+    DynamicSystem* result = new RigidBody();
 
     result->r = l * mass;
     result->R = q.toMatrix();
@@ -34,22 +34,25 @@ RigidBody RigidBody::operator*(double h){
     return result;
 }
 RigidBody RigidBody::operator=(DynamicSystem* A){
-    RigidBody result;
-    result.INERTIA_TENSOR = A->INERTIA_TENSOR;
-    result.l = A->l;
-    result.r = A->r;
-    result.L = A->L;
-    result.q = A->q;
-    result.R = A->R;
-    return result;
+   // RigidBody result;
+   INERTIA_TENSOR = A->INERTIA_TENSOR;
+    l = A->l;
+    r = A->r;
+    L = A->L;
+    q = A->q;
+    R = A->R;
+    return *this;
 }
 
 RigidBody::RigidBody() {
     INERTIA_TENSOR = {0, 0, 0, 0, 0, 0, 0, 0, 0};
-    INERTIA_TENSOR.values[0][0] = 10/((mass*length*length)/40+(3*mass*height*height)/80);
-    INERTIA_TENSOR.values[1][1] = 10/((mass*length*length)/20);
-    INERTIA_TENSOR.values[2][2] = 10/((mass*length*length)/40+(3*mass*height*height)/80);
-    q = {height*1/4, 0.5, 0.5, 0.5};
+    INERTIA_TENSOR.values[0][0] = ((mass*length*length)/40+(3*mass*height*height)/80);
+    INERTIA_TENSOR.values[1][1] = ((mass*length*length)/20);
+    INERTIA_TENSOR.values[2][2] = ((mass*length*length)/40+(3*mass*height*height)/80);
+    double tr,s;
+    tr =  INERTIA_TENSOR.values[0][0] +  INERTIA_TENSOR.values[1][1] + INERTIA_TENSOR.values[2][2];
+
+    q = {cos(30),1,0,0};
     R = q.toMatrix();
-    L = Vector{150, 100, 50};
+    L = Vector{4000, -2000, 2000};
 }

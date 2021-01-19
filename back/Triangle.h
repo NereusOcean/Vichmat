@@ -10,7 +10,7 @@
 #include "DynamicSystem.h"
 #include <iostream>
 
-RigidBody rigidBody = RigidBody();
+RigidBody* rigidBody = new RigidBody();
 
 void updateAfterSolve(RigidBody &body){
     body.q = body.q.normalize();
@@ -20,20 +20,14 @@ template < typename T, typename T2>
 void solve(T &body, T2 h) {
     T k1, k2, k3, k4;
     ContextDynamic system;
-
-    body = system.setTypeOfBody(&body);
-    k1 = body;
+    k1 = system.setTypeOfBody(&body);
     body =(body + k1 * (h / 3));
-    body = system.setTypeOfBody(&body);
-    k2 = body;
+    k2 = system.setTypeOfBody(&body);
     body = (body + ((k1 * (-h / 3)) + (k2 * h)));
-    body = system.setTypeOfBody(&body);
-    k3 = body;
+    k3 = system.setTypeOfBody(&body);
     body = (body + ((k1 * h) + (k2 * (-h)) + (k3 * h)));
-    body = system.setTypeOfBody(&body);
-    k4 = body;
+    k4 = system.setTypeOfBody(&body);
     body = body + ((k1 * (1.0 / 8)) + (k2 * (3.0 / 8)) + (k3 * (3.0 / 8)) + (k4 * (1.0 / 8))) * h;
-    std::cout<<"std\n";
     updateAfterSolve(body);
 }
 
@@ -79,39 +73,39 @@ void drawTriangle() {
 
     glBegin(GL_TRIANGLES);
     glColor3f(0.52, 0.44, 1.0);// фиолетовой
-    glVertex3f(0, y, -z/4);
-    glVertex3f(-x, -y, -z/4);
-    glVertex3f(0, 0, z+z/4);
+    glVertex3f(0, y, -(z/4));
+    glVertex3f(-x, -y, -(z/4));
+    glVertex3f(0, 0, z);
     glEnd();
 
     glBegin(GL_TRIANGLES);
     glColor3f(1.0, 0.84, 0.0);  // желтой
     glVertex3f(x, -y, -z/4);
     glVertex3f(0, y, -z/4);
-    glVertex3f(0, 0, z+z/4);
+    glVertex3f(0, 0, z);
     glEnd();
 
     glBegin(GL_TRIANGLES);
     glColor3f(0.94, 0.5, 0.5);// розовой
-    glVertex3f(-x , -y , -z/4);
-    glVertex3f(x, -y , -z/4);
-    glVertex3f(0.0, 0.0, z+z/4);
+    glVertex3f(-x , -y , -(z/4));
+    glVertex3f(x, -y , -(z/4));
+    glVertex3f(0, 0, z);
     glEnd();
 
     glBegin(GL_TRIANGLES);// основание пирамиды
     glColor3f(1.0, 0.51, 0.28); // рыжим
-    glVertex3f(0, y, -z/4);
-    glVertex3f(-x, -y, -z/4);
-    glVertex3f(x, -y, -z/4);
+    glVertex3f(0, y, -(z/4));
+    glVertex3f(-x, -y, -(z/4));
+    glVertex3f(x, -y, -(z/4));
     glEnd();
 }
 
 void Display() {
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    solve<RigidBody,double>(rigidBody, 0.000005);
+    solve<RigidBody,double>(*rigidBody, 0.000005);
     glPushMatrix();
-    glRotated(2*acos(rigidBody.q.r) * 180 / M_PI, rigidBody.q.i, rigidBody.q.j, rigidBody.q.k);
+    glRotated(2*acos(rigidBody->q.r) * 180 / M_PI, rigidBody->q.i, rigidBody->q.j, rigidBody->q.k);
     glTranslated(0, 0, 0);
     glPolygonMode(GL_FRONT, GL_FILL);
     drawTriangle();
