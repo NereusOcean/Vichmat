@@ -9,7 +9,7 @@
 #include "../Quaternion.h"
 #include "../DynamicSystem.h"
 
-const double height = 1,length = 1.5;
+const double height = 2.4494897427832,length = 1.5;
 const double mass = 2;
 
 
