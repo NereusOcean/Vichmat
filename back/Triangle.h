@@ -11,6 +11,9 @@
 #include <iostream>
 
 RigidBody* rigidBody = new RigidBody();
+double x = 1.5;
+double y = 1.5;
+double z = 2.4494897427832;
 
 void updateAfterSolve(RigidBody &body){
     body.q = body.q.normalize();
@@ -67,10 +70,7 @@ void Idle() {
     glVertex3f(x, -y, -z);
     glEnd();*/
 void drawTriangle() {
-    double x = 1.5;
-    double y = 1.5;
-    double z = 1.5;
-
+   
     glBegin(GL_TRIANGLES);
     glColor3f(0.52, 0.44, 1.0);// фиолетовой
     glVertex3f(0, y, -(z/4));
