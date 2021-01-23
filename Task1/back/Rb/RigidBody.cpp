@@ -51,6 +51,11 @@ RigidBody::RigidBody(double height,double length,double mass){
     INERTIA_TENSOR.values[0][0] = ((mass*length*length)/40+(3*mass*height*height)/80);
     INERTIA_TENSOR.values[1][1] = ((mass*length*length)/20);
     INERTIA_TENSOR.values[2][2] = ((mass*length*length)/40+(3*mass*height*height)/80);
+    
+    
+    double a =(INERTIA_TENSOR.values[0][0] * INERTIA_TENSOR.values[1][1]* INERTIA_TENSOR.values[2][2]);
+    INERTIA_TENSOR = INERTIA_TENSOR * (1/a);
+    
 
     q = {cos(45),1,0,0};
     R = q.toMatrix();
