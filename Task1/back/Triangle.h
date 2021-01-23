@@ -121,10 +121,10 @@ void Reshape(int W, int H) {
     gluLookAt(0, 30, 0, 0, 0, 0, 0, 0, 1);
 }
 
-void Start(int argc, char * argv [],double z,double x,double y,double mass) {
-    z2 = z;
-    x2 = x;
-    y2 = y;
+void Start(int argc, char * argv [],double height,double length,double mass) {
+    z2 = height;
+    x2 = length/2;
+    y2 = length/2;
     mass2 = mass;
     rigidBody = new RigidBody(z2,x2,mass2);
 
