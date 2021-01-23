@@ -59,6 +59,6 @@ RigidBody::RigidBody(double height,double length,double mass){
 
     q = {cos(45),1,0,0};
     R = q.toMatrix();
-    L = Vector{16000, -8000, 8000};
+    L = Vector{4000, -2000, 2000};
 }
 
