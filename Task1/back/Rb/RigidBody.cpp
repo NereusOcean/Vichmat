@@ -12,6 +12,8 @@ DynamicSystem* RigidBody::f() {
     result->R = q.toMatrix();
     Vector omega = ((R * INERTIA_TENSOR) * R.transpose()) * L;
     result->q = Quaternion{0, omega.x, omega.y, omega.z} * q * 0.5;
+    double a = 0.5*omega.y * -100,b = 0.5*omega.z* 50,c = 0.5*omega.x* 150;
+    std::cout<<a<<"\t"<<b<<"\t"<<c<<"\n";
     result->l = Vector{0, 0, 0};
     result->L = Vector{0, 0, 0};
     return result;
@@ -48,12 +50,11 @@ RigidBody::RigidBody(double height,double length,double mass){
     this->length = length;
     this->mass = mass;
     INERTIA_TENSOR = {0, 0, 0, 0, 0, 0, 0, 0, 0};
-    INERTIA_TENSOR.values[0][0] = 1/((mass*length*length)/40+(3*mass*height*height)/80);
-    INERTIA_TENSOR.values[1][1] = 1/((mass*length*length)/20);
-    INERTIA_TENSOR.values[2][2] = 1/((mass*length*length)/40+(3*mass*height*height)/80);
-    
+    INERTIA_TENSOR.values[0][0] = 20/((mass*length*length)/40+(3*mass*height*height)/80);
+    INERTIA_TENSOR.values[1][1] = 20/((mass*length*length)/40+(3*mass*height*height)/80);
+    INERTIA_TENSOR.values[2][2] = 20/((mass*length*length)/20);
     q = {cos(45),1,0,0};
     R = q.toMatrix();
-    L = Vector{4000, -2000, 2000};
+    L = Vector{150, -100, 50};
 }
 
