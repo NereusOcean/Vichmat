@@ -19,6 +19,9 @@ RigidBody* rigidBody;
 void updateAfterSolve(RigidBody &body){
     body.q = body.q.normalize();
     body.R = body.q.toMatrix();
+    Vector omega = (body.R * body.INERTIA_TENSOR * body.R.transpose()) * body.L;
+    double a = 0.5*omega.y * body.L.y,b = 0.5*omega.z* body.L.z,c = 0.5*omega.x* body.L.x;
+    std::cout<<"New Frame;\n"<<a<<"\t"<<b<<"\t"<<c<<"\n";
 }
 template < typename T, typename T2>
 void solve(T &body, T2 h) {
