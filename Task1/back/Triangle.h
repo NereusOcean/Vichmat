@@ -22,6 +22,14 @@ void updateAfterSolve(RigidBody &body){
     Vector omega = (body.R * body.INERTIA_TENSOR * body.R.transpose()) * body.L;
     double a = 0.5*omega.y * body.L.y,b = 0.5*omega.z* body.L.z,c = 0.5*omega.x* body.L.x;
     std::cout<<"New Frame;\n"<<a<<"\t"<<b<<"\t"<<c<<"\n";
+    //std::cout<<"\nOmega Vectore: "<< omega.x<<", "<<omega.y<<", "<<omega.z<<"\n";
+   // std::cout<<"\nL Vectore: "<< body.L.x<<", "<<body.L.y<<", "<<body.L.z<<"\n";
+    //for(int i =0; i < 3; ++i){
+  //  //    for(int j =0; j < 3; ++j){
+      //      std::cout<<body.R.values[i][j]<<" ";
+      //  }
+       // std::cout<<"\n";
+    //}
 }
 template < typename T, typename T2>
 void solve(T &body, T2 h) {
@@ -101,11 +109,11 @@ void displayXYZ()
 void Display() {
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    solve<RigidBody,double>(*rigidBody, 0.000001);
+    solve<RigidBody,double>(*rigidBody, 0.0001);
     glPushMatrix();
    // glTranslated(rigidBody->r.x, rigidBody->r.y, rigidBody->r.z - 100);
 
-    glRotated(acos(rigidBody->q.r) * 360 / M_PI, rigidBody->q.i, rigidBody->q.j, rigidBody->q.k);
+    glRotated(2*acos(rigidBody->q.r) * 180 / M_PI, rigidBody->q.i, rigidBody->q.j, rigidBody->q.k);
     glTranslated(0, 0, 0);
     glPolygonMode(GL_FRONT, GL_FILL);
     drawTriangle();

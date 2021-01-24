@@ -43,16 +43,18 @@ RigidBody RigidBody::operator=(DynamicSystem* A){
     R = A->R;
     return *this;
 }
+
+
 RigidBody::RigidBody(double height,double length,double mass){
     this->height = height;
     this->length = length;
     this->mass = mass;
     INERTIA_TENSOR = {0, 0, 0, 0, 0, 0, 0, 0, 0};
-    INERTIA_TENSOR.values[0][0] = 20/((mass*length*length)/40+(3*mass*height*height)/80);
-    INERTIA_TENSOR.values[1][1] = 20/((mass*length*length)/40+(3*mass*height*height)/80);
-    INERTIA_TENSOR.values[2][2] = 20/((mass*length*length)/20);
-    q = {cos(45),1,0,0};
+    INERTIA_TENSOR.values[0][0] = 1/((mass*length*length)/40+(3*mass*height*height)/80);
+    INERTIA_TENSOR.values[1][1] = 1/((mass*length*length)/40+(3*mass*height*height)/80);
+    INERTIA_TENSOR.values[2][2] = 1/((mass*length*length)/20);
+    q = {0.5,0.5,0.5,0.5};
     R = q.toMatrix();
-    L = Vector{150, -100, 50};
+    L = Vector{6, 6, 6};
 }
 
