@@ -41,17 +41,7 @@ public:
         result.z = values[2][0] * A.x + values[2][1] * A.y + values[2][2] * A.z;
         return result;
     }
-    
-    Matrix operator*(double a){
-        Matrix result{0,0,0,
-                      0,0,0,
-                      0,0,0};
-        result.values[0][0] = values[0][0]* a;
-        result.values[1][1] = values[1][1]* a;
-        result.values[2][2] = values[2][2]* a;
-        return result;
-    }
-
+   
     Matrix transpose() {
         Matrix result;
         for (int i = 0; i < 3; i++) {
