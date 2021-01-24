@@ -24,13 +24,14 @@ template < typename T, typename T2>
 void solve(T &body, T2 h) {
     T k1(z2,x2,mass2), k2(z2,x2,mass2), k3(z2,x2,mass2), k4(z2,x2,mass2);
     ContextDynamic system;
-    k1 = system.setTypeOfBody(&body);
-    body =(body + k1 * (h / 3));
-    k2 = system.setTypeOfBody(&body);
-    body = (body + ((k1 * (-h / 3)) + (k2 * h)));
-    k3 = system.setTypeOfBody(&body);
-    body = (body + ((k1 * h) + (k2 * (-h)) + (k3 * h)));
-    k4 = system.setTypeOfBody(&body);
+    T temp = body;
+    k1 = system.setTypeOfBody(&temp);
+    temp =(body + k1 * (h / 3));
+    k2 = system.setTypeOfBody(&temp);
+    temp = (body + ((k1 * (-h / 3)) + (k2 * h)));
+    k3 = system.setTypeOfBody(&temp);
+    temp = (body + ((k1 * h) + (k2 * (-h)) + (k3 * h)));
+    k4 = system.setTypeOfBody(&temp);
     body = body + ((k1 * (1.0 / 8)) + (k2 * (3.0 / 8)) + (k3 * (3.0 / 8)) + (k4 * (1.0 / 8))) * h;
     updateAfterSolve(body);
 }
