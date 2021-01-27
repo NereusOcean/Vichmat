@@ -48,7 +48,7 @@ void solve(T &body, T2 h) {
     //double  E =  0.5*(omega.x*body.L.x + omega.y * body.L.y + omega.z* body.L.z);
     double E =  omega * body.L * 0.5;
     //double a = 0.5*omega.y * body.L.y,b = 0.5*omega.z* body.L.z,c = 0.5*omega.x* body.L.x;
-    std::cout<<"New Frame:\n"<<"E = "<<std::setprecision(17)<<E<<"\n";
+    std::cout<<"New Frame:\n"<<"E = "<<std::setprecision(16)<<E<<"\n";
     //updateAfterSolve(body);
 }
 
