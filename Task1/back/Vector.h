@@ -28,13 +28,13 @@ public:
         return result;
     }
 
-   /* double operator*(Vector h) const {
-        double result;
+    double operator*(Vector h) const {
+        double result = 0;
         result += x *h.x;
         result += y * h.y;
         result += z * h.z;
         return result;
-    }*/
+    }
  /*   Vector operator=(Vector other) const{
         Vector result;
         result.x = other.x;

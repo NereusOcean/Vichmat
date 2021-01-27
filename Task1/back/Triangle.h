@@ -45,10 +45,10 @@ void solve(T &body, T2 h) {
     body.q = body.q.normalize();
     body.R = body.q.toMatrix();
     Vector omega = (body.R * body.INERTIA_TENSOR * body.R.transpose()) * body.L;
-    double  E =  0.5*(omega.x*body.L.x + omega.y * body.L.y + omega.z* body.L.z);
-
+    //double  E =  0.5*(omega.x*body.L.x + omega.y * body.L.y + omega.z* body.L.z);
+    double E =  omega * body.L * 0.5;
     //double a = 0.5*omega.y * body.L.y,b = 0.5*omega.z* body.L.z,c = 0.5*omega.x* body.L.x;
-    std::cout<<"New Frame:\n"<< std::setprecision(16)<<E<<"\n";
+    std::cout<<"New Frame:\n"<<"E = "<<std::setprecision(17)<<E<<"\n";
     //updateAfterSolve(body);
 }
 
@@ -114,6 +114,9 @@ void displayXYZ()
 void Display() {
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+
+
     solve<RigidBody,double>(*rigidBody, 0.001);
     glPushMatrix();
    // glTranslated(rigidBody->r.x, rigidBody->r.y, rigidBody->r.z - 100);
@@ -135,7 +138,11 @@ void Reshape(int W, int H) {
     gluPerspective(15.0, ((float)W)/((float)H), 10.0, 100.0);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    gluLookAt(0, 30, 0, 0, 0, 0, 0, 0, 1);
+    //glTranslated(0, 0, 0);
+    //glRotated(100,0,0,0);
+    gluLookAt(0, 30, -60, 0, 0, 0, 0, 0, 1);
+
+
 }
 
 void Start(int argc, char * argv [],double height,double length,double mass) {
