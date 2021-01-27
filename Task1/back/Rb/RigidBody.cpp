@@ -8,11 +8,12 @@
 DynamicSystem* RigidBody::f() {
     DynamicSystem* result = new RigidBody(this->height,this->length,this->mass);
 
-    result->r = l * mass;
+    //result->r = l * mass;
+    //this->q = q.normalize();
     result->R = q.toMatrix();
     Vector omega = ((R * INERTIA_TENSOR) * R.transpose()) * L;
     result->q = Quaternion{0, omega.x, omega.y, omega.z} * q * 0.5;
-    result->l = Vector{0, 0, 0};
+    //result->l = Vector{0, 0, 0};
     result->L = Vector{0, 0, 0};
     return result;
 }

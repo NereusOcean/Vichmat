@@ -27,6 +27,14 @@ public:
         result.z = z + other.z;
         return result;
     }
+
+   /* double operator*(Vector h) const {
+        double result;
+        result += x *h.x;
+        result += y * h.y;
+        result += z * h.z;
+        return result;
+    }*/
  /*   Vector operator=(Vector other) const{
         Vector result;
         result.x = other.x;

@@ -9,6 +9,7 @@
 #include "ContextDynamic.h"
 #include "DynamicSystem.h"
 #include <iostream>
+#include<iomanip>
 double x2;
 double y2;
 double z2;
@@ -17,11 +18,8 @@ RigidBody* rigidBody;
 
 
 void updateAfterSolve(RigidBody &body){
-    body.q = body.q.normalize();
-    body.R = body.q.toMatrix();
-    Vector omega = (body.R * body.INERTIA_TENSOR * body.R.transpose()) * body.L;
-    double a = 0.5*omega.y * body.L.y,b = 0.5*omega.z* body.L.z,c = 0.5*omega.x* body.L.x;
-    std::cout<<"New Frame;\n"<<a<<"\t"<<b<<"\t"<<c<<"\n";
+
+
     //std::cout<<"\nOmega Vectore: "<< omega.x<<", "<<omega.y<<", "<<omega.z<<"\n";
    // std::cout<<"\nL Vectore: "<< body.L.x<<", "<<body.L.y<<", "<<body.L.z<<"\n";
     //for(int i =0; i < 3; ++i){
@@ -44,7 +42,14 @@ void solve(T &body, T2 h) {
     temp = (body + ((k1 * h) + (k2 * (-h)) + (k3 * h)));
     k4 = system.setTypeOfBody(&temp);
     body = body + ((k1 * (1.0 / 8)) + (k2 * (3.0 / 8)) + (k3 * (3.0 / 8)) + (k4 * (1.0 / 8))) * h;
-    updateAfterSolve(body);
+    body.q = body.q.normalize();
+    body.R = body.q.toMatrix();
+    Vector omega = (body.R * body.INERTIA_TENSOR * body.R.transpose()) * body.L;
+    double  E =  0.5*(omega.x*body.L.x + omega.y * body.L.y + omega.z* body.L.z);
+
+    //double a = 0.5*omega.y * body.L.y,b = 0.5*omega.z* body.L.z,c = 0.5*omega.x* body.L.x;
+    std::cout<<"New Frame:\n"<< std::setprecision(16)<<E<<"\n";
+    //updateAfterSolve(body);
 }
 
 
@@ -109,7 +114,7 @@ void displayXYZ()
 void Display() {
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    solve<RigidBody,double>(*rigidBody, 0.0001);
+    solve<RigidBody,double>(*rigidBody, 0.001);
     glPushMatrix();
    // glTranslated(rigidBody->r.x, rigidBody->r.y, rigidBody->r.z - 100);
 
@@ -138,7 +143,7 @@ void Start(int argc, char * argv [],double height,double length,double mass) {
     x2 = length/2;
     y2 = length/2;
     mass2 = mass;
-    rigidBody = new RigidBody(z2,x2,mass2);
+    rigidBody = new RigidBody(height,length,mass2);
 
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);

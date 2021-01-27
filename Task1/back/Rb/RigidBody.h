@@ -15,7 +15,7 @@
 
 class RigidBody: public DynamicSystem{
 public:
-    double height,length, x,y,mass;
+    double height,length,mass;
 
     Matrix R;
     Vector r, l, L;
