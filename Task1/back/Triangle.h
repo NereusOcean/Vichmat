@@ -22,6 +22,7 @@ template < typename T, typename T2>
 void solve(T &body, T2 h) {
     T k1(z2,x2,mass2), k2(z2,x2,mass2), k3(z2,x2,mass2), k4(z2,x2,mass2);
     ContextDynamic system;
+    std::cout<<"--------------------------New Frame-----------------------\n";
     T temp = body;
     k1 = system.setTypeOfBody(&temp);
     temp =(body + k1 * (h / 3));
@@ -37,7 +38,7 @@ void solve(T &body, T2 h) {
 
     double E =  omega * body.L * 0.5;
 
-    std::cout<<"New Frame:\n"<<"E = "<<std::setprecision(17)<<E<<"\n";
+    std::cout<<"E = "<<std::setprecision(17)<<E<<"\n";
 
 }
 
