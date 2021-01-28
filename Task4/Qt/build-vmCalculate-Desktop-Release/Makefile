@@ -364,6 +364,7 @@ compiler_moc_header_clean:
 	-$(DEL_FILE) moc_mainwindow.cpp moc_func.cpp
 moc_mainwindow.cpp: ../vmCalculate/bijection.h \
 		../vmCalculate/newton.h \
+		../vmCalculate/func.h \
 		../vmCalculate/mainwindow.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
@@ -399,14 +400,15 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_ui
 
 main.o: ../vmCalculate/main.cpp ../vmCalculate/mainwindow.h \
 		../vmCalculate/bijection.h \
-		../vmCalculate/newton.h
+		../vmCalculate/newton.h \
+		../vmCalculate/func.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../vmCalculate/main.cpp
 
 mainwindow.o: ../vmCalculate/mainwindow.cpp ../vmCalculate/mainwindow.h \
 		../vmCalculate/bijection.h \
 		../vmCalculate/newton.h \
-		ui_mainwindow.h \
-		../vmCalculate/func.h
+		../vmCalculate/func.h \
+		ui_mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../vmCalculate/mainwindow.cpp
 
 bijection.o: ../vmCalculate/bijection.cpp ../vmCalculate/bijection.h
