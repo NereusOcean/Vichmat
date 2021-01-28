@@ -20,6 +20,19 @@ public:
         }
         return *this;
     }
+    Matrix operator*(double x) {
+        return Matrix{ {{values[0][0] * x, values[0][1] * x, values[0][2] * x},
+                               {values[1][0] * x, values[1][1] * x, values[1][2] * x},
+                               {values[2][0] * x,values[2][1] * x, values[2][2] * x}} };
+    }
+
+    Matrix operator+(Matrix nm) {
+        Matrix m;
+        for (int i = 0; i < 3;i++)
+            for (int j = 0; j < 3;j++)
+                m.values[i][j] = values[i][j] + nm.values[i][j];
+        return m;
+    }
 
     Matrix operator*(Matrix A) {
         Matrix result;
@@ -43,13 +56,15 @@ public:
     }
    
     Matrix transpose() {
-        Matrix result;
+        Matrix nm;
+
         for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                result.values[i][j] = values[j][i];
+            for (int j = i + 1; j < 3; j++) {
+                nm.values[i][j] = values[j][i];
+                nm.values[j][i] = values[i][j];
             }
         }
-        return result;
+        return nm;
     }
 };
 

@@ -26,6 +26,7 @@ public:
     DynamicSystem* f()override;
     RigidBody operator+(RigidBody A);
     RigidBody operator*(double h);
+    RigidBody operator=(RigidBody* A);
 
     RigidBody(double height,double length,double mass);
 

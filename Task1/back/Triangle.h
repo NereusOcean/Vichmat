@@ -17,22 +17,12 @@ double mass2;
 RigidBody* rigidBody;
 
 
-void updateAfterSolve(RigidBody &body){
 
-
-    //std::cout<<"\nOmega Vectore: "<< omega.x<<", "<<omega.y<<", "<<omega.z<<"\n";
-   // std::cout<<"\nL Vectore: "<< body.L.x<<", "<<body.L.y<<", "<<body.L.z<<"\n";
-    //for(int i =0; i < 3; ++i){
-  //  //    for(int j =0; j < 3; ++j){
-      //      std::cout<<body.R.values[i][j]<<" ";
-      //  }
-       // std::cout<<"\n";
-    //}
-}
 template < typename T, typename T2>
 void solve(T &body, T2 h) {
     T k1(z2,x2,mass2), k2(z2,x2,mass2), k3(z2,x2,mass2), k4(z2,x2,mass2);
     ContextDynamic system;
+    std::cout<<"___________________new frame____________________"<<"\n";
     T temp = body;
     k1 = system.setTypeOfBody(&temp);
     temp =(body + k1 * (h / 3));
@@ -44,12 +34,11 @@ void solve(T &body, T2 h) {
     body = body + ((k1 * (1.0 / 8)) + (k2 * (3.0 / 8)) + (k3 * (3.0 / 8)) + (k4 * (1.0 / 8))) * h;
     body.q = body.q.normalize();
     body.R = body.q.toMatrix();
+
     Vector omega = (body.R * body.INERTIA_TENSOR * body.R.transpose()) * body.L;
-    //double  E =  0.5*(omega.x*body.L.x + omega.y * body.L.y + omega.z* body.L.z);
     double E =  omega * body.L * 0.5;
-    //double a = 0.5*omega.y * body.L.y,b = 0.5*omega.z* body.L.z,c = 0.5*omega.x* body.L.x;
-    std::cout<<"New Frame:\n"<<"E = "<<std::setprecision(17)<<E<<"\n";
-    //updateAfterSolve(body);
+    std::cout<<"E = "<<std::setprecision(16)<<E<<"\nOmega after runge kytti = "<<(omega.x + omega.y + omega.z)<<"\n\n";
+
 }
 
 
@@ -117,7 +106,7 @@ void Display() {
 
 
 
-    solve<RigidBody,double>(*rigidBody, 0.001);
+    solve<RigidBody,double>(*rigidBody, 0.0001);
     glPushMatrix();
    // glTranslated(rigidBody->r.x, rigidBody->r.y, rigidBody->r.z - 100);
 
