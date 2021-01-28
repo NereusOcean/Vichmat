@@ -14,6 +14,7 @@ double x2;
 double y2;
 double z2;
 double mass2;
+
 RigidBody* rigidBody;
 
 
@@ -49,7 +50,6 @@ void Idle() {
 
 void drawTriangle() {
 
-
     glBegin(GL_TRIANGLES);
 
 
@@ -78,6 +78,7 @@ void drawTriangle() {
 
 
     glEnd();
+
 }
 
 void displayXYZ()
@@ -109,7 +110,7 @@ void Display() {
 
 
 
-    solve<RigidBody,double>(*rigidBody, 0.0001);
+    solve<RigidBody,double>(*rigidBody, 0.001);
     glPushMatrix();
    // glTranslated(rigidBody->r.x, rigidBody->r.y, rigidBody->r.z - 100);
 
@@ -140,7 +141,7 @@ void Reshape(int W, int H) {
 void Start(int argc, char * argv [],double height,double length,double mass) {
     z2 = height;
     x2 = length/2;
-    y2 = length/2;
+    y2 = length;
     mass2 = mass;
     rigidBody = new RigidBody(height,length,mass2);
 
