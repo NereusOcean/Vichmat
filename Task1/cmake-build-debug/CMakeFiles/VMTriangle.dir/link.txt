@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/VMTriangle.dir/main.cpp.o CMakeFiles/VMTriangle.dir/back/Rb/RigidBody.cpp.o  -o VMTriangle  -lglut -lGL -lGLU 
