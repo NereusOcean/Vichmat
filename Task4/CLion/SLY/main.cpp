@@ -3,7 +3,7 @@
 #include "Methods/Newton/Newton.h"
 #include "iomanip"
 int main() {
-    double left, right, parameter, epsilon, solve;
+    double left, right, parameter, epsilon=0, solve;
 
     std::cout<<"Enter the left border:\n";
     std::cin>>left;

@@ -30,14 +30,29 @@ double Bijection::solve(){
     double  tempLeft = x0;
     double  tempRight = x1;
     double  center = tempLeft + (tempRight-tempLeft)/2;
+    double stop =-1;
+    bool hey;
     //std::cout<<tempRight -tempLeft;
     while((tempRight - tempLeft > accuracy)){
         if(isRoot(tempLeft, center,a)){
             tempRight = center;
+            hey=true;
         }else {
             tempLeft = center;
+            hey=false;
         }
         center = tempLeft + (tempRight - tempLeft)/2;
+        if(hey == true){
+            if(stop == fabs(tempRight - center)){
+                break;
+            }
+            stop = fabs(tempRight - center);
+        }else{
+            if(stop == fabs(tempLeft - center)){
+                break;
+            }
+            stop = fabs(tempLeft - center);
+        }
     }
     return center;
 }

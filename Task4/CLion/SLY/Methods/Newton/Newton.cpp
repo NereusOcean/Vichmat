@@ -37,7 +37,7 @@ bool Newton::isRoot(double left, double right,double a){
 }
 
 double Newton::solve(){
-    double next, result;
+    double next, result, stop = -1;
     if(funcCalc(x0,a)*funcCalcDerivative2(x0) > 0 ){
         next = x0;
     }else{
@@ -48,6 +48,10 @@ double Newton::solve(){
     while(fabs(next - result)>accuracy){
         next = result;
         result = next - funcCalc(next,a)/funcCalcDerivative1(next);
+        if(stop == fabs(next - result)){
+            break;
+        }
+        stop = fabs(next - result);
     }
     return result;
 }
